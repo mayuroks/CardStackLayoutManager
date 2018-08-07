@@ -51,12 +51,12 @@ public class HzActivity extends AppCompatActivity {
         }
 
         private void init() {
-            mItems.add(new MyModel("Goodbye! Have a nice day.", R.drawable.one));
-            mItems.add(new MyModel("Hope to see you soon?", R.drawable.two));
-            mItems.add(new MyModel("It was nice seeing you?", R.drawable.three));
-            mItems.add(new MyModel("Where have you been?", R.drawable.four));
-            mItems.add(new MyModel("What time is it?", R.drawable.five));
-            mItems.add(new MyModel("How are you today?", R.drawable.six));
+            mItems.add(new MyModel("Goodbye! Have a nice day", "6:00 PM", R.drawable.one));
+            mItems.add(new MyModel("In the creative zone", "4:00 PM", R.drawable.two));
+            mItems.add(new MyModel("Let the work begin", "2:00 PM", R.drawable.three));
+            mItems.add(new MyModel("Office! Run for it", "12:00 PM", R.drawable.four));
+            mItems.add(new MyModel("Time for your breakfast", "10:00 AM", R.drawable.five));
+            mItems.add(new MyModel("How are you today?", "8:00 AM", R.drawable.six));
         }
 
         @Override
@@ -71,6 +71,7 @@ public class HzActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             MyModel model = mItems.get(position);
             holder.tv.setText(model.title);
+            holder.tvDescription.setText(model.time);
             holder.image.setImageResource(model.drawable);
         }
 
@@ -80,24 +81,28 @@ public class HzActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            TextView tv;
+            TextView tv, tvDescription;
             CircleImageView image;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                tv = (TextView) itemView.findViewById(R.id.tv);
-                image = (CircleImageView) itemView.findViewById(R.id.image);
+                tv = itemView.findViewById(R.id.tv);
+                tvDescription = itemView.findViewById(R.id.tvDescription);
+                image = itemView.findViewById(R.id.image);
             }
         }
     }
 
     class MyModel {
         String title;
+        String time;
+
         @DrawableRes
         int drawable;
 
-        public MyModel(String title, int drawable) {
+        public MyModel(String title, String time, int drawable) {
             this.title = title;
+            this.time = time;
             this.drawable = drawable;
         }
     }
